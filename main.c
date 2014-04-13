@@ -28,13 +28,7 @@ int buf_in(void)		//inserting data on buffer
 	int in;		
 	scanf("%X", &in);   
 	if (in == 0xAA) return 1;  //Exit if the data just got is 0xAA
-	if ((buf_end == buf_size - 1) && (buf[buf_size - 1] == buf_init_value) && (buf[0] != 0xFF))	return;	//This If statement and below is to prevent the data overflow
-	else if ((buf[buf_end] == buf_init_value) && (buf[buf_end + 1] != buf_init_value) && (buf_end != buf_size - 1) && (buf_end != buf_size - 2))	return;	
-	/*      Those if statement prevent the data overwritten by just exiting the fuction.
-	*       The way I did this is when Endpoint is 0xff(init) and the Endpoint+1 is not 0xff(not init) which can tell there is a data that has not been used(printed) yet
-	*       one on the upper If is to prevent when a data point is at the edge of buffer is empty but the buf[0] have data
-	*       second one is to prevent on just a normal situation like - 0x65 0xA5 0xFF 0x44 -. end excepting the first unique variable like the first if statement.
-    */      
+	    
     buf[buf_end] = in;	//the endpoint is ahead of where actual data is stored by one
 	buf_end += 1;	
 	if (buf_end >= buf_size) buf_end = 0; //It is not possible to endpoint be same or over the buffer size. so it goes same or over, this clear startpoint to 0
