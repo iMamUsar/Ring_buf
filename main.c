@@ -15,13 +15,15 @@ unsigned char buf_end = buf_startpoint;
 void buf_init(void)          //Should initalize the buffer before you start using them
 {
 	int i;
-	for (i = 0; i <= buf_size - 1; i++) buf[i] = buf_init_value;		
+	for (i = 0; i <= buf_size - 1; i++) buf[i] = buf_init_value;
+    for(i = 0; i <= 10; i++) printf("To enter the Data Output Mode, you should enter AA instead\n\n");		
 }
 void buf_stat(void)		//You can see what data is stored in buffer
 {
 	int i;
 	printf("\n\n");
 	for (i = 0; i <= buf_size - 1; i++) printf("%X, ", buf[i]);
+	printf("\n\n");
 }
 int buf_in(void)		//inserting data on buffer
 {
@@ -53,7 +55,6 @@ int main(void)
 	while (1)
 	{
 		buf_stat();
-		printf("\n\n\nEnd Position %d\n\n\n", buf_end);
 		if (buf_in() == 1)		//When 0xAA has entered during this fuction, execute the data output mode
 		{
 			if (buf_start == buf_end)	printf("No more data to Print");	//if startpoint and endpoint 
